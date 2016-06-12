@@ -2,18 +2,18 @@ import os
 
 def intro():
     os.system('clear')
-    print "Please select a game difficulty by typing it in"
-    print "Possible choices include easy, medium, and hard."
-    difficulty = raw_input("Type : ")
-
-    if difficulty == 'easy':
-        return 'easy'
-    elif difficulty == 'medium':
-        return 'medium'
-    elif difficulty == 'hard':
-        return 'hard'
-    else:
-        return 'wrong'
+    while(True):
+        print "Please select a game difficulty by typing it in"
+        print "Possible choices include easy, medium, and hard."
+        difficulty = raw_input("Type : ")
+        if difficulty == 'easy':
+            return 'easy'
+        elif difficulty == 'medium':
+            return 'medium'
+        elif difficulty == 'hard':
+            return 'hard'
+        else:
+            print 'Type again'
 
 def easy_blacks(tried,score,intro_check):
 
@@ -188,13 +188,13 @@ def question_number(score):
     num = score + 1
     return "What should be substituted in for __{0}__? ".format(num)
 
-def main_game(dif):
+def main_game(difficulty):
 
     tried = 0
     score = 0
     intro_check = False
 
-    if dif == 'easy':
+    if difficulty == 'easy':
         the_answer = ['world','python','print','html']
         while(score < 4 and tried < 5):
             os.system('clear')
@@ -207,7 +207,7 @@ def main_game(dif):
             else:
                 tried += 1
         easy_blacks(tried,score,intro_check)
-    elif dif == 'medium':
+    elif difficulty == 'medium':
         the_answer = ['function','arguments','None','list']
         while(score < 4 and tried < 5):
             os.system('clear')
@@ -220,7 +220,7 @@ def main_game(dif):
             else:
                 tried += 1
         medium_blacks(tried,score,intro_check)
-    elif dif == 'hard':
+    elif difficulty == 'hard':
         the_answer = ['class','method','__init__','instance','__repr__',"__add__","__sub__","__lt__","__gt__","__eq__"]
         while(score < 10 and tried < 5):
             os.system('clear')
