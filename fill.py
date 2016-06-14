@@ -1,42 +1,52 @@
 import os
 
 
+def num_blanks_maker(answers):
+    """
+    input: list of answers
+    output: list of blanks
+    """
+    blanks = []
+    converter = 1
+    for i in range(0, len(answers)):
+        result = "__{0}__".format(i + converter)
+        blanks.append(result)
+    return blanks
+
+
+def answer_mixer(score, answers):
+    """
+    input: list of answers
+    output: mixed answers
+    """
+    num_blanks = num_blanks_maker(answers)
+
+    counter = 0
+    quiz_list = []
+    while(counter < len(easy_answers)):
+        if score <= counter:
+            quiz_list.append(num_blanks[counter])
+        else:
+            quiz_list.append(answers[counter])
+        counter += 1
+    return quiz_list
+
+
 def easy_blanks(tried, score, intro_check):
-    easy_answer = ['world', 'python', 'print', 'html']
-    easy_blank = ['__1__', '__2__', '__3__', '__4__']
-
-    if score == 0:
-        quiz1 = easy_blank[score]
-    else:
-        quiz1 = easy_answer[score]
-
-    if score < 2:
-        quiz2 = easy_blank[score]
-    else:
-        quiz2 = easy_answer[score]
-
-    if score < 3:
-        quiz3 = easy_blank[score]
-    else:
-        quiz3 = easy_answer[score]
-
-    if score < 4:
-        quiz4 = easy_blank[score]
-    else:
-        quiz4 = easy_answer[score]
-
+    easy_answers = ['world', 'python', 'print', 'html']
+    quiz_list = answer_mixer(score, easy_answers)
     if tried == 0 and intro_check == False:
         print "You've chosen easy!\n\nYou will get 5 guesses per problem \n"
     print "The current paragraph reads as such:\nA common first thing to do in a language is display"
-    print "'Hello {0}!' In {1} this is particularly easy; all you have to do".format(quiz1, quiz2)
+    print "'Hello {0}!' In {1} this is particularly easy; all you have to do".format(quiz_list[0], quiz_list[1])
     print "is type in:"
-    print "{0} \"Hello {1}!\"".format(quiz3, quiz1)
+    print "{0} \"Hello {1}!\"".format(quiz_list[2], quiz_list[0])
     print "Of course, that isn't a very useful thing to do. However, it is an"
-    print "example of how to output to the user using the {0} command, and".format(quiz3)
+    print "example of how to output to the user using the {0} command, and".format(quiz_list[2])
     print "produces a program which does something, so it is useful in that capacity.\n"
     print "It may seem a bit odd to do something in a Turing complete language that"
-    print "can be done even more easily with an {0} file in a browser, but it's".format(quiz4)
-    print "a step in learning {0} syntax, and that's really its purpose.\n\n".format(quiz2)
+    print "can be done even more easily with an {0} file in a browser, but it's".format(quiz_list[3])
+    print "a step in learning {0} syntax, and that's really its purpose.\n\n".format(quiz_list[1])
     if score == 4:
         print "You won!"
     print "score : ", score
