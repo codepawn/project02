@@ -144,13 +144,18 @@ def difficulty_set():
             did_before = True
 
 
-def difficulty_logic(the_answer, score, score_max, tried, tried_max, intro_check):
+def difficulty_logic(the_answer, score, score_max, tried, tried_max, intro_check, difficulty):
     """
     main game logic
     """
     while(score <= score_max and tried < tried_max):
         os.system('clear')
-        easy_blanks(tried, score, intro_check, the_answer)
+        if difficulty == 'easy':
+            easy_blanks(tried, score, intro_check, the_answer)
+        if difficulty == 'medium':
+            medium_blanks(tried, score, intro_check, the_answer)
+        if difficulty == 'hard':
+            hard_blanks(tried, score, intro_check, the_answer)
         user_answer = raw_input(question_number(score))
         intro_check = True
         if the_answer[score] == user_answer:
@@ -172,22 +177,19 @@ def main_game(difficulty):
     score_max = 4
     hardmod_score_max = 10
     intro_check = False
-
     easy_answer = ['world', 'python', 'print', 'html']
     midium_answer = ['function', 'arguments', 'None', 'list']
     hard_answer = ['class', 'method', '__init__', 'instance',
                    '__repr__', "__add__", "__sub__", "__lt__", "__gt__", "__eq__"]
-
     if difficulty == 'easy':
         difficulty_logic(easy_answer, score, score_max,
-                         tried, tried_max, intro_check)
+                         tried, tried_max, intro_check, difficulty)
     if difficulty == 'medium':
         difficulty_logic(midium_answer, score, score_max,
-                         tried, tried_max, intro_check)
+                         tried, tried_max, intro_check, difficulty)
     if difficulty == 'hard':
         difficulty_logic(hard_answer, score, hardmod_score_max,
-                         tried, tried_max, intro_check)
-
+                         tried, tried_max, intro_check, difficulty)
 
 # run
 
